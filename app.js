@@ -10,14 +10,16 @@ const app = express();
 
 app.set("view engine", "ejs");
 
-
 app.use(bodyParser.urlencoded({extended: true}));
-//alttaki newsletter projesinde denediğimizde olmamıştı ama bu sefer oldu. İlginç
 app.use(express.static("public"));
-
 
 mongoose.connect("mongodb+srv://admin-alp:qwer1234@clustertest.dnwgm.mongodb.net/todolistDB",
 {useNewUrlParser: true, useUnifiedTopology: true});
+
+
+const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+const today  = new Date();
+const theDate = today.toLocaleDateString("en-US", options);
 
 const itemsSchema = {
   name: String
@@ -58,7 +60,7 @@ app.get("/", function(req, res) {
       });
       res.redirect("/");
     }else{
-    res.render("list", {kindOfDay: "Today", items: foundItems});
+    res.render("list", {kindOfDay: theDate, items: foundItems});
   }
   });
 
@@ -97,7 +99,7 @@ const item = new Item({
   name: newListItem
 });
 
-if(listName === "Today"){
+if(listName == theDate){
   item.save();
   res.redirect("/");
 }else{
@@ -116,7 +118,7 @@ app.post("/delete", function(req, res){
 const checkedItemId = req.body.checkbox;
 const listName= req.body.listName;
 
-if(listName == "Today"){
+if(listName == theDate){
   // silerken deleteOne kullanabileceğin gibi  Item.findByIdAndRemove(checkedItemId, function(err){...}) fonksiyonunu da aynı şekilde kullanabilirsin
   Item.deleteOne({_id: checkedItemId}, function(err){
       if(err){

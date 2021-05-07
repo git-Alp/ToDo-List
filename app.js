@@ -34,7 +34,7 @@ const item2 = new Item({
   name: "Hit the + button to add a new item."
 });
 const item3 = new Item({
-  name: "Check the checkbox to remove an item from the list."
+  name: "Click the checkbox to remove an item from the list."
 });
 
 const defaultItems = [item1, item2, item3];

@@ -1,7 +1,7 @@
 # ToDo-List
 
 
-Built a ToDo List Web App relies on Node.js that allows us to be able to add or delete new items as well as creating seperate ToDo lists typing /...(whatever we want) after the adress. 
+Built a ToDo List Web App relies on Node.js that allows us to be able to add or delete new items as well as creating separate ToDo lists typing /...(whatever we want) after the adress. 
 
 
 Besides, used Mongoose to persist the data in the database.
